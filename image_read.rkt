@@ -63,7 +63,7 @@
 (define (image-new pixels source)
   (let ([width  (image-width image)]
         [height (image-height image)])
-  (color-list->bitmap pixels width height)))
+  (color-list->bitmap (map car pixels) width height)))
 
 ;; main procedure
 (define (simplify-image image color-count #:precision [precision 4])
@@ -79,4 +79,4 @@
     
     (cond
       [(> min-distance precision) (rec pixels-new colors-new)]
-      [else (values colors (image-new (map car pixels) image))])))
+      [else (values colors (image-new pixels image))])))
