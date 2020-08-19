@@ -2,8 +2,8 @@
 
 (require
   2htdp/image
-  (only-in "colors.rkt" distance avg)
-  (only-in "samples.rkt" *image*))
+  (only-in "color.rkt" distance avg)
+  (only-in "sample.rkt" *image*))
 
 ; algorithm 
 ; 1. get all pixels with empty category
