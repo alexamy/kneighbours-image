@@ -1,10 +1,11 @@
 #lang racket
 
 (require
-  (only-in "image.rkt" simplify-image)
-  (only-in "sample.rkt" *image*))
+  2htdp/image
+  (only-in "image.rkt" simplify-image))
 
-(define (start)
-  (simplify-image *image* 8))
+(define file-name (vector-ref (current-command-line-arguments) 0))
+(define image (bitmap/file file-name))
 
-(start)
+(define-values (image-colors image-simplified) (simplify-image image 8))
+(save-image image-simplified "image-simplified.png")
