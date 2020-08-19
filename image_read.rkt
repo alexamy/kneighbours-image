@@ -1,15 +1,10 @@
 #lang racket
 
-(require 2htdp/image)
+(require
+  2htdp/image
+  (only-in "samples.rkt" *image*))
 
-(define *image-sample* (bitmap "snapshot.png"))
-
-(define *gradient-sample*
-  (apply beside
-         (for/list ([step (range 1 16)])
-           (rectangle 1 1 "solid" (color (quotient 255 step) 0 0 255)))))
-
-; algorithm
+; algorithm 
 ; 1. get all pixels with empty category
 ; 2. make random categories
 ; 3. for each pixel find nearest category
