@@ -2,7 +2,7 @@
 
 (require 2htdp/image)
 
-(provide *image* *gradient*)
+(provide (all-defined-out))
 
 (define *image* (bitmap "snapshot.png"))
 

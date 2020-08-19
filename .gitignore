@@ -1,4 +1,5 @@
 *.rkt~
+*.bak
 *.DS_Store
 *.exe
 compiled
