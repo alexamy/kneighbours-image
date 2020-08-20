@@ -4,3 +4,5 @@ compiled
 *.DS_Store
 *.exe
 *.zip
+*.png
+!snapshot.png
