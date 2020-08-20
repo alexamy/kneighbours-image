@@ -4,7 +4,7 @@
   2htdp/image
   (only-in "color.rkt" distance avg))
 
-(provide simplify-image)
+(provide simplify-image pretty-simplify)
 
 ; algorithm 
 ; 1. get all pixels with empty category
@@ -33,7 +33,7 @@
    (λ (lst) (apply avg (map cdr lst)))
    (group-by car pixels)))
 
-;; main procedure
+;; simplify image by k-means algorithm
 (define (simplify-image image color-count #:precision [precision 4])
   (define color-list (image->color-list image))
   (define colors-start (build-list color-count (λ (x) (list-ref color-list (random (length color-list))))))
@@ -48,3 +48,15 @@
     (cond
       [(> min-distance precision) (loop pixels-new colors-new)]
       [else (values colors (image-new (map car pixels) image))])))
+
+;; simplify image and combine colors, original and simplified versions
+(define (pretty-simplify image color-count)
+  (let-values ([(colors image-simplified) (simplify-image image color-count)]
+               [(width) (image-width image)]
+               [(height) (image-height image)])
+    (define (make-rectangle color) (rectangle (quotient width 8) (* height 2) "solid" color))
+    
+    (beside
+     (apply beside (map make-rectangle colors))
+     (above image image-simplified))))
+    
